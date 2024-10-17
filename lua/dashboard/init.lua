@@ -93,6 +93,7 @@ end
 function db:save_user_options()
   self.user_cursor_line = vim.opt.cursorline:get()
   self.user_laststatus_value = vim.opt.laststatus:get()
+  self.user_cmdheight_value = vim.opt.cmdheight:get()
   self.user_tabline_value = vim.opt.showtabline:get()
   self.user_winbar_value = vim.opt.winbar:get()
 end
@@ -100,6 +101,7 @@ end
 function db:set_ui_options(opts)
   if opts.hide.statusline then
     vim.opt.laststatus = 0
+    vim.opt.cmdheight = 0
   end
   if opts.hide.tabline then
     vim.opt.showtabline = 0
@@ -116,6 +118,7 @@ function db:restore_user_options(opts)
 
   if opts.hide.statusline and self.user_laststatus_value then
     vim.opt.laststatus = tonumber(self.user_laststatus_value)
+    vim.opt.cmdheight = tonumber(self.user_cmdheight_value)
   end
 
   if opts.hide.tabline and self.user_tabline_value then
